@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2025 at 09:34 AM
+-- Generation Time: Jun 25, 2025 at 09:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -238,22 +238,6 @@ INSERT INTO `sales` (`id`, `product_id`, `quantity`, `discount`, `vat`, `total`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sale_items`
---
-
-CREATE TABLE `sale_items` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `sale_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `sessions`
 --
 
@@ -366,14 +350,6 @@ ALTER TABLE `sales`
   ADD KEY `sales_product_id_foreign` (`product_id`);
 
 --
--- Indexes for table `sale_items`
---
-ALTER TABLE `sale_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sale_items_sale_id_foreign` (`sale_id`),
-  ADD KEY `sale_items_product_id_foreign` (`product_id`);
-
---
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -429,12 +405,6 @@ ALTER TABLE `sales`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `sale_items`
---
-ALTER TABLE `sale_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -449,13 +419,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `sales`
   ADD CONSTRAINT `sales_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `sale_items`
---
-ALTER TABLE `sale_items`
-  ADD CONSTRAINT `sale_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `sale_items_sale_id_foreign` FOREIGN KEY (`sale_id`) REFERENCES `sales` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
