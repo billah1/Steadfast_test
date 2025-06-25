@@ -8,7 +8,7 @@ class Sale extends Model
 {
     protected $guarded = ['id'];
 
-     public function items() {
-        return $this->hasMany(SaleItem::class);
+     public function product() {
+        return $this->belongsTo(Product::class);
     }
 }

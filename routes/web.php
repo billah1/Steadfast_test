@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,16 +20,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    Route::resource('products', ProductController::class);
-    Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
-    Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
-    Route::get('/reports', [SaleController::class, 'report'])->name('reports');
+  Route::get('/', fn() => redirect('/products'));
+
+Route::resource('products', ProductController::class);
+Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
+Route::post('sales/store', [SaleController::class, 'store'])->name('sales.store');
+Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
 });
 
 require __DIR__.'/auth.php';
 
-// Route::middleware(['auth'])->group(function () {
 
-// });
 
 
